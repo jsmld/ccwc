@@ -5,17 +5,18 @@ import fs from 'fs'
 try {
   const args = arg({
     "-c": String,
-  });
+    "-l": String
+  })
 
-  const fileName = args['-c'];
+  const bytesFileName = args['-c']
+  const linesFileName = args['-l']
 
-  if (fileName) {
-    const stats = fs.statSync(fileName);
-    const size = stats.size;
-    console.log(size, fileName);
-  } else {
-    console.error('Please provide a file name to check the size using the -c flag.');
+  if (bytesFileName) {
+    console.log(fs.statSync(bytesFileName).size, bytesFileName)
+  }
+  if (linesFileName) {
+    console.log(fs.readFileSync(linesFileName).toString().split('\n').length - 1, linesFileName)
   }
 } catch (error) {
-  console.error(error.message);
+  console.error(error.message)
 }
