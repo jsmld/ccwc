@@ -27,6 +27,9 @@ try {
   if (charsFileName) {
     console.log(fs.readFileSync(charsFileName).toString().split('').length, charsFileName)
   }
+  if (process.argv.length == 3) {
+    console.log(fs.statSync(process.argv[2]).size, fs.readFileSync(process.argv[2]).toString().split('\n').length - 1, fs.readFileSync(process.argv[2]).toString().trim().split(/\s+/).length, process.argv[2])
+  }
 } catch (error) {
   console.error(error.message)
 }
