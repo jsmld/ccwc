@@ -6,12 +6,14 @@ try {
   const args = arg({
     "-c": String,
     "-l": String,
-    "-w": String
+    "-w": String,
+    "-m": String
   })
 
   const bytesFileName = args['-c']
   const linesFileName = args['-l']
   const wordsFileName = args['-w']
+  const charsFileName = args['-m']
 
   if (bytesFileName) {
     console.log(fs.statSync(bytesFileName).size, bytesFileName)
@@ -21,6 +23,9 @@ try {
   }
   if (wordsFileName) {
     console.log(fs.readFileSync(wordsFileName).toString().trim().split(/\s+/).length, wordsFileName)
+  }
+  if (charsFileName) {
+    console.log(fs.readFileSync(charsFileName).toString().split('').length, charsFileName)
   }
 } catch (error) {
   console.error(error.message)
